@@ -1,0 +1,52 @@
+<div class="text-center">
+    <h1>{% block title %} Bem-vindo ao RouterManager {% endblock %}</h1>
+</div>
+<div class="row">
+    <div class="col order-md-1">
+        <h4 class="mb-3">Informações de Acesso</h4>
+        <form class="needs-validation" novalidate>
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label for="login">Usuário</label>
+                    <input type="text" class="form-control" id="login" placeholder="admin" required>
+                    <div class="invalid-feedback">
+                        Validação usuário é requerido.
+                    </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="password">Senha</label>
+                    <input type="password" class="form-control" id="password" required>
+                    <div class="invalid-feedback">
+                        Valid senha é requerida.
+                    </div>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label for="command">Comando para execução</label>
+                <input type="text" class="form-control" id="command"
+                       placeholder="ex: user set nome.usuario password=11111, ...">
+                <div class="invalid-feedback">
+                    Valid comando é requerido.
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label for="ipAddress">Endereço IP</label>
+                <input type="text" class="form-control" id="ipAddress"
+                       placeholder="ex: 192.168.1.2, 192.168.1.10, 10.78.4.3, ...">
+            </div>
+
+            <div class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" id="listAddress">
+                <label class="custom-control-label" for="listAddress">Você gostaria de realizar o acesso com IPs
+                    cadastrados?</label>
+            </div>
+
+            <hr class="mb-4">
+            <div class="text-right">
+                <button class="btn btn-success btn-lg" type="submit">Executar</button>
+            </div>
+        </form>
+    </div>
+</div>
