@@ -1,5 +1,6 @@
 from flask import Flask
 from app.extensions import configuration, database, commands
+from app.controllers.home_controller import app_bp
 from app.controllers.router_controller import router_bp
 
 app = Flask(__name__, template_folder='views/templates', static_folder='views/static')
@@ -8,6 +9,7 @@ database.init_app(app)
 commands.init_app(app)
 
 
+app.register_blueprint(app_bp)
 app.register_blueprint(router_bp)
 
 if __name__ == '__main__':

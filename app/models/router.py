@@ -9,4 +9,10 @@ class Router(db.Model):
     def __init__(self, address):
         self.address = address
 
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'address': self.address,
+        }
+
 

@@ -4,18 +4,18 @@
 <div class="row">
     <div class="col order-md-1">
         <h4 class="mb-3">Informações de Acesso</h4>
-        <form class="needs-validation" novalidate>
+        <form class="needs-validation" action="{{ url_for('router.access_routers') }}" novalidate method="POST">
             <div class="row">
                 <div class="col-md-6 mb-3">
-                    <label for="login">Usuário</label>
-                    <input type="text" class="form-control" id="login" placeholder="admin" required>
+                    <label for="username">Usuário</label>
+                    <input type="text" class="form-control" id="username" name="username" placeholder="admin" required>
                     <div class="invalid-feedback">
                         Validação usuário é requerido.
                     </div>
                 </div>
                 <div class="col-md-6 mb-3">
                     <label for="password">Senha</label>
-                    <input type="password" class="form-control" id="password" required>
+                    <input type="password" class="form-control" id="password" name="password" required>
                     <div class="invalid-feedback">
                         Valid senha é requerida.
                     </div>
@@ -24,7 +24,7 @@
 
             <div class="mb-3">
                 <label for="command">Comando para execução</label>
-                <input type="text" class="form-control" id="command"
+                <input type="text" class="form-control" id="command" name="command"
                        placeholder="ex: user set nome.usuario password=11111, ...">
                 <div class="invalid-feedback">
                     Valid comando é requerido.
@@ -32,14 +32,14 @@
             </div>
 
             <div class="mb-3">
-                <label for="ipAddress">Endereço IP</label>
-                <input type="text" class="form-control" id="ipAddress"
+                <label for="ip_address">Endereço IP</label>
+                <input type="text" class="form-control" id="ip_address" name="ip_address"
                        placeholder="ex: 192.168.1.2, 192.168.1.10, 10.78.4.3, ...">
             </div>
 
             <div class="custom-control custom-checkbox">
-                <input type="checkbox" class="custom-control-input" id="listAddress">
-                <label class="custom-control-label" for="listAddress">Você gostaria de realizar o acesso com IPs
+                <input type="checkbox" class="custom-control-input" id="list_address" name="list_address">
+                <label class="custom-control-label" for="list_address">Você gostaria de realizar o acesso com IPs
                     cadastrados?</label>
             </div>
 

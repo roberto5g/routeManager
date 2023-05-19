@@ -7,7 +7,9 @@ class RouterService:
         self.router_repository = RouterRepository()
 
     def get_all_routers(self):
-        return self.router_repository.get_all()
+        routes_response = self.router_repository.get_all()
+        routers_dict = [router.to_dict() for router in routes_response]
+        return routers_dict
 
     def get_router(self, router_id):
         return self.router_repository.get_by_id(router_id)
