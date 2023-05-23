@@ -1,1 +1,17 @@
+.container {
+    margin-top: 20px;
+}
 
+.center {
+    text-align: center;
+}
+
+.borda {
+    border: 1px solid gray;
+    border-radius: 1px;
+}
+
+.space {
+    margin-top: 20px;
+    margin-button: 20px;
+}

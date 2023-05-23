@@ -1,5 +1,39 @@
 {% extends 'base.html' %}
 
 {% block content %}
-IPS
+<div class="row center">
+    <div class="col borda">
+        <div class="row space">
+            <div class="col">
+                <form class="form-inline" action="{{ url_for('router.create_router') }}" method="POST">
+                  <label class="sr-only" for="ip_address">Endereço IP</label>
+                  <input type="text" class="form-control mr-sm-2" id="ip_address" name="ip_address" placeholder="Endereço IP">
+                    
+                  <button type="submit" class="btn btn-success">Salvar</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="row space">
+            <div class="col">
+                <table class="table table-sm">
+                  <thead>
+                    <tr>
+                      <th scope="col-md-10">Endereço IP</th>
+                      <th scope="col">Ação</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for router in routers %}
+                    <tr>
+                      <td>{{ router['address'] }}</td>
+                      <td>delete</td>
+                    </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}

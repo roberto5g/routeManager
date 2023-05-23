@@ -1,9 +1,11 @@
-from flask import Blueprint, jsonify, request
+from flask import Blueprint, jsonify, request, redirect, url_for
 from app.services.manager_service import ManagerService
+from app.services.router_service import RouterService
 
 router_bp = Blueprint('router', __name__, url_prefix='/router')
 
 manager_service = ManagerService()
+router_service = RouterService()
 
 
 '''@router_bp.route('/', methods=['GET'])
@@ -27,3 +29,10 @@ def access_routers():
     manager_service.process_router_data(dist)
 
     return jsonify({'message': 'Data processed successfully'})
+
+
+@router_bp.route('/create/router', methods=['POST'])
+def create_router():
+    ip_address = request.form.get('ip_address')
+    router_service.create_router(ip_address)
+    return redirect(url_for('app.route_manager'))
