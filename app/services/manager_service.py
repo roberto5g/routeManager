@@ -25,7 +25,6 @@ class ManagerService:
             ssh = paramiko.SSHClient()
             ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
             ssh.connect(route, username=username, password=password)
-            # TODO comandos devem ser passados como parametros
             stdin, stdout, stderr = ssh.exec_command(command)
             output = stdout.read().decode('utf-8')
             print(output)

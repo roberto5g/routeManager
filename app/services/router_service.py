@@ -14,7 +14,13 @@ class RouterService:
     def get_router(self, router_id):
         return self.router_repository.get_by_id(router_id)
 
+    def get_router_address(self, address):
+        return self.router_repository.get_by_address(address)
+
     def create_router(self, address):
+        existing_router = self.get_router_address(address)
+        if existing_router:
+            return False
         return self.router_repository.create(address)
 
     def update_router(self, router_id, address):

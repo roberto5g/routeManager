@@ -13,6 +13,10 @@ class RouterRepository:
         return Router.query.get(router_id)
 
     @staticmethod
+    def get_by_address(address):
+        return Router.query.filter_by(address=address).first()
+
+    @staticmethod
     def create(address):
         router = Router(address)
         db.session.add(router)

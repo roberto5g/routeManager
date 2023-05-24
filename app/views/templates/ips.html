@@ -7,7 +7,7 @@
             <div class="col">
                 <form class="form-inline" action="{{ url_for('router.create_router') }}" method="POST">
                   <label class="sr-only" for="ip_address">Endereço IP</label>
-                  <input type="text" class="form-control mr-sm-2" id="ip_address" name="ip_address" placeholder="Endereço IP">
+                  <input type="text" class="form-control mr-sm-2" id="ip_address" name="ip_address" placeholder="Endereço IP" required>
                     
                   <button type="submit" class="btn btn-success">Salvar</button>
                 </form>
@@ -27,7 +27,7 @@
                     {% for router in routers %}
                     <tr>
                       <td>{{ router['address'] }}</td>
-                      <td>delete</td>
+                      <td><a href="#" type="button" class="badge badge-danger" onclick="showModalDeleteIp({{ router['id'] }})">deletar</a></td>
                     </tr>
                     {% endfor %}
                   </tbody>
@@ -35,5 +35,38 @@
             </div>
         </div>
     </div>
+
+    <div class="modal fade" id="modalDeleteIp" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Remover</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form action="{{ url_for('router.delete_router') }}" method="POST">
+              <div class="form-group">
+                <label for="ip_address_delete" class="col-form-label">Deseja realmente remover?</label>
+                <input type="hidden" class="form-control" id="ip_address_delete" name="ip_address">
+              </div>
+              <div class="row botoes_modal">
+                  <div class="col">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                      <button type="submit" class="btn btn-danger">Delete</button>
+                  </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
 </div>
+<script>
+    function showModalDeleteIp(id){
+        $('#ip_address_delete').val(id)
+        $('#modalDeleteIp').modal('show')
+    }
+</script>
 {% endblock %}

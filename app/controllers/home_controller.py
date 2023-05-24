@@ -14,7 +14,7 @@ def home():
 @app_bp.route('/gerenciar/ip')
 def route_manager():
     routers = router_service.get_all_routers()
-    return render_template('ips.html', routers = routers)
+    return render_template('ips.html', routers=routers)
 
 
 @app_bp.route('/gerenciar/usuarios')

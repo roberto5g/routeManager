@@ -36,3 +36,11 @@ def create_router():
     ip_address = request.form.get('ip_address')
     router_service.create_router(ip_address)
     return redirect(url_for('app.route_manager'))
+
+
+@router_bp.route('/delete/router', methods=['POST'])
+def delete_router():
+    ip_address = request.form.get('ip_address')
+    router_service.delete_router(ip_address)
+    return redirect(url_for('app.route_manager'))
+
