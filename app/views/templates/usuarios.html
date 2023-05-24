@@ -1,5 +1,85 @@
 {% extends 'base.html' %}
 
 {% block content %}
-usuários
+<div class="row">
+    <div class="col borda">
+        <div class="row space">
+            <div class="col">
+                <form action="{{ url_for('user.create_user') }}" method="POST">
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group">
+                                <label for="login">Login</label>
+                                <input type="text" class="form-control" id="login" name="login" placeholder="Informe o login" required>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-group">
+                                <label for="user_password">Senha</label>
+                                <input type="password" class="form-control" id="user_password" name="user_password" placeholder="Senha">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        <button type="submit" class="btn btn-success">Salvar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="row space center">
+            <div class="col">
+                <table class="table table-sm">
+                  <thead>
+                    <tr>
+                      <th scope="col-md-10">Login</th>
+                      <th scope="col">Ação</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for user in users %}
+                    <tr>
+                      <td>{{ user['login'] }}</td>
+                      <td><a href="#" type="button" class="badge badge-danger" onclick="showModalDeleteUser({{ user['id'] }})">deletar</a></td>
+                    </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modalDelete" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Remover</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form action="{{ url_for('user.delete_user') }}" method="POST">
+              <div class="form-group">
+                <label for="user_delete" class="col-form-label">Deseja realmente remover?</label>
+                <input type="hidden" class="form-control" id="user_delete" name="user">
+              </div>
+              <div class="row botoes_modal">
+                  <div class="col">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                      <button type="submit" class="btn btn-danger">Delete</button>
+                  </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+<script>
+    function showModalDeleteUser(id){
+        $('#user_delete').val(id)
+        $('#modalDelete').modal('show')
+    }
+</script>
 {% endblock %}

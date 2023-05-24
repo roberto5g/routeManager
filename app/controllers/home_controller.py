@@ -1,7 +1,9 @@
 from flask import Blueprint, render_template
 from app.services.router_service import RouterService
+from app.services.user_service import UserService
 
 router_service = RouterService()
+user_service = UserService()
 
 app_bp = Blueprint('app', __name__, url_prefix='/app')
 
@@ -19,4 +21,5 @@ def route_manager():
 
 @app_bp.route('/gerenciar/usuarios')
 def user_manager():
-    return render_template('usuarios.html')
+    users = user_service.get_all_users()
+    return render_template('usuarios.html', users=users)
