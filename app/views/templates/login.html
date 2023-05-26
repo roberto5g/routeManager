@@ -6,13 +6,21 @@
   <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/login.css') }}">
 </head>
 <body>
-
+{% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <div class="flash-messages">
+        {% for message in messages %}
+        <div class="flash-message">{{ message }}</div>
+        {% endfor %}
+    </div>
+    {% endif %}
+{% endwith %}
 <div class="login-container">
   <h2 class="text-center">Login</h2>
-  <form id="loginForm" method="POST">
+  <form id="loginForm" action="{{ url_for('login.login') }}" method="POST">
     <div class="form-group">
-      <label for="username">Usuário:</label>
-      <input type="text" class="form-control" id="username" name="username">
+      <label for="login">Usuário:</label>
+      <input type="text" class="form-control" id="login" name="login">
     </div>
     <div class="form-group">
       <label for="password">Senha:</label>

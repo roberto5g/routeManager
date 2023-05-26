@@ -1,4 +1,5 @@
 from flask import Blueprint, jsonify, request, redirect, url_for
+from flask_login import login_required
 from app.services.manager_service import ManagerService
 from app.services.router_service import RouterService
 
@@ -8,14 +9,8 @@ manager_service = ManagerService()
 router_service = RouterService()
 
 
-'''@router_bp.route('/', methods=['GET'])
-def get_all_routes():
-    routers = router_service.get_all_routers()
-    routers_dict = [router.to_dict() for router in routers]
-    return jsonify({'routers': routers_dict})'''
-
-
 @router_bp.route('/access/routers', methods=['POST'])
+@login_required
 def access_routers():
 
     dist = {
@@ -32,6 +27,7 @@ def access_routers():
 
 
 @router_bp.route('/create/router', methods=['POST'])
+@login_required
 def create_router():
     ip_address = request.form.get('ip_address')
     router_service.create_router(ip_address)
@@ -39,6 +35,7 @@ def create_router():
 
 
 @router_bp.route('/delete/router', methods=['POST'])
+@login_required
 def delete_router():
     ip_address = request.form.get('ip_address')
     router_service.delete_router(ip_address)

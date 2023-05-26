@@ -29,7 +29,7 @@
             <a class="nav-link" href="{{ url_for('app.user_manager') }}">Gerenciar Usuários</a>
           </li>
         </ul>
-        <form class="form-inline my-2 my-lg-0">
+        <form class="form-inline my-2 my-lg-0" action="{{ url_for('login.logout') }}" method="POST">
           <button class="btn btn-success my-2 my-sm-0" type="submit">Logout</button>
         </form>
       </div>
@@ -37,9 +37,6 @@
     <div class="container">
         {% block content %} {% endblock %}
     </div>
-
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, Bootstrap JS -->
 
   </body>
 </html>
