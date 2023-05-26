@@ -1,0 +1,14 @@
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #C9E8D6;
+    height: 100vh;
+}
+.login-container {
+    width: 25%;
+    background-color: white; /* Fundo branco do formulário */
+    padding: 20px;
+    border-radius: 5px;
+
+}
