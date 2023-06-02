@@ -29,7 +29,7 @@ def login():
             login_user(user)
             return redirect(url_for('app.home'))
         else:
-            flash('Credenciais inválidas.', 'error')
+            flash('Usuário ou senha inválidos.', 'error')
 
     return render_template('login.html')
 
