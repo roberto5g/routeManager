@@ -11,23 +11,23 @@ class ManagerService:
         if data['list_address'] == "on":
             routes_response = router_service.get_all_routers()
             for router in routes_response:
-                print(router['address'])
                 self.access_routes(router['address'], data['username'], data['password'], data['command'])
 
         if data['ip_address'] is not None:
             ip_list = re.findall(r'\b(?:\d{1,3}\.){3}\d{1,3}\b', data['ip_address'])
             for route in ip_list:
                 self.access_routes(route, data['username'], data['password'], data['command'])
+        return 'Acesso aos dispositivos MikroTik concluído!'
 
     @staticmethod
     def access_routes(route, username, password, command):
         try:
             ssh = paramiko.SSHClient()
             ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-            ssh.connect(route, username=username, password=password)
+            ssh.connect(route, username=username, password=password, timeout=10)
             stdin, stdout, stderr = ssh.exec_command(command)
             output = stdout.read().decode('utf-8')
-            print(output)
+            print(command, output)
             ssh.close()
         except paramiko.AuthenticationException:
             print(f'Falha na autenticação para o IP {route}')
@@ -36,4 +36,3 @@ class ManagerService:
         except Exception as e:
             print(f'Erro ao conectar ao IP {route}: {e}')
 
-        return 'Acesso aos dispositivos MikroTik concluído!'

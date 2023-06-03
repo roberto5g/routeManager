@@ -1,20 +1,31 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="row center">
+<div class="row">
     <div class="col borda">
         <div class="row space">
             <div class="col">
-                <form class="form-inline" action="{{ url_for('router.create_router') }}" method="POST">
-                  <label class="sr-only" for="ip_address">Endereço IP</label>
-                  <input type="text" class="form-control mr-sm-2" id="ip_address" name="ip_address" placeholder="Endereço IP" required>
-                    
-                  <button type="submit" class="btn btn-success">Salvar</button>
+                <form action="{{ url_for('router.create_router') }}" method="POST" enctype="multipart/form-data">
+                  <div class="row">
+                      <div class="col-md-6">
+                          <label for="ip_address">Endereço IP</label>
+                          <input type="text" class="form-control" id="ip_address" name="ip_address" placeholder="Endereço IP">
+                      </div>
+                      <div class="col-md-6">
+                          <label for="file">Selecionar arquivo</label>
+                          <input type="file" class="form-control" id="file" name="file">
+                      </div>
+                  </div>
+                  <div class="row space">
+                      <div class="col text-right">
+                          <button type="submit" class="btn btn-success">Salvar</button>
+                      </div>
+                  </div>
                 </form>
             </div>
         </div>
 
-        <div class="row space">
+        <div class="row space center">
             <div class="col">
                 <table class="table table-sm">
                   <thead>
@@ -64,6 +75,7 @@
     </div>
 </div>
 <script>
+    $('#ip_manager').addClass('active')
     function showModalDeleteIp(id){
         $('#ip_address_delete').val(id)
         $('#modalDeleteIp').modal('show')
