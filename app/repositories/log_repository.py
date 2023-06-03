@@ -1,35 +1,16 @@
-from app.models.router import Router
+from app.models.log import Log
 from app.extensions.database import db
 
 
-class RouterRepository:
+class LogRepository:
 
     @staticmethod
     def get_all():
-        return Router.query.all()
+        return Log.query.all()
 
     @staticmethod
-    def get_by_id(router_id):
-        return Router.query.get(router_id)
-
-    @staticmethod
-    def get_by_address(address):
-        return Router.query.filter_by(address=address).first()
-
-    @staticmethod
-    def create(address):
-        router = Router(address)
-        db.session.add(router)
+    def create(user_app, user_router, ip_address, description):
+        log = Log(user_app, user_router, ip_address, description)
+        db.session.add(log)
         db.session.commit()
-        return router
-
-    def update(self, router_id, address):
-        router = self.get_by_id(router_id)
-        router.address = address
-        db.session.commit()
-        return router
-
-    def delete(self, router_id):
-        router = self.get_by_id(router_id)
-        db.session.delete(router)
-        db.session.commit()
+        return log

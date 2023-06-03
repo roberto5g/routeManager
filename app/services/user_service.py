@@ -1,4 +1,5 @@
 from app.repositories.user_repository import UserRepository
+from flask_login import current_user
 
 
 class UserService:
@@ -28,4 +29,9 @@ class UserService:
 
     def delete_user(self, user_id):
         return self.user_repository.delete(user_id)
+
+    @staticmethod
+    def logged_user():
+        return current_user.login
+
 

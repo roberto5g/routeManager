@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row">
+    <div class="col borda">
+        <div class="row space center">
+            <div class="col">
+                <table class="table table-sm">
+                  <thead>
+                    <tr>
+                      <th scope="col-md-2">Usuário Logado</th>
+                      <th scope="col-md-2">Usuário Router</th>
+                      <th scope="col-md-2">IP</th>
+                      <th scope="col-md-4">Comando</th>
+                      <th scope="col-md-2">Data</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for log in logs %}
+                    <tr>
+                      <td>{{ log['user_app'] }}</td>
+                      <td>{{ log['user_router'] }}</td>
+                      <td>{{ log['ip_address'] }}</td>
+                      <td>{{ log['description'] }}</td>
+                      <td>{{ log['created_at'] }}</td>
+                    </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>
+<script>
+    $('#log_manager').addClass('active')
+
+</script>
+{% endblock %}
