@@ -2,8 +2,12 @@ import paramiko
 import re
 
 from app.services.router_service import RouterService
+from app.services.user_service import UserService
+from app.services.log_service import LogService
 
 router_service = RouterService()
+user_service = UserService()
+log_service = LogService()
 
 
 class ManagerService:
@@ -27,7 +31,8 @@ class ManagerService:
             ssh.connect(route, username=username, password=password, timeout=10)
             stdin, stdout, stderr = ssh.exec_command(command)
             output = stdout.read().decode('utf-8')
-            print(command, output)
+            log_service.create_log(user_service.logged_user(), username, route, command)
+            print(command, output, user_service.logged_user())
             ssh.close()
         except paramiko.AuthenticationException:
             print(f'Falha na autenticação para o IP {route}')
@@ -35,4 +40,3 @@ class ManagerService:
             print(f'Erro SSH para o IP {route}: {ssh_exception}')
         except Exception as e:
             print(f'Erro ao conectar ao IP {route}: {e}')
-
