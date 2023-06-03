@@ -41,6 +41,13 @@ def create_router():
     return redirect(url_for('app.route_manager'))
 
 
+@router_bp.route('/load', methods=['GET'])
+@login_required
+def load_routers():
+    routes = router_service.get_all_routers()
+    return jsonify({'data': routes})
+
+
 @router_bp.route('/delete/router', methods=['POST'])
 @login_required
 def delete_router():
