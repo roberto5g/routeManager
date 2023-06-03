@@ -10,9 +10,7 @@ log_service = LogService()
 @log_bp.route('/load', methods=['GET'])
 @login_required
 def load_logs():
-
     logs = log_service.get_all_logs()
-
     return jsonify({'data': logs})
 
 

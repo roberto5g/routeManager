@@ -27,22 +27,17 @@
             </div>
         </div>
 
-        <div class="row space center">
+        <div class="row space">
             <div class="col">
-                <table class="table table-sm">
+                <table id="table_users" class="table table-striped table-bordered" style="width:100%">
                   <thead>
                     <tr>
-                      <th scope="col-md-10">Login</th>
-                      <th scope="col">Ação</th>
+                      <th class="text-center">Login</th>
+                      <th>Ação</th>
                     </tr>
                   </thead>
                   <tbody>
-                    {% for user in users %}
-                    <tr>
-                      <td>{{ user['login'] }}</td>
-                      <td><a href="#" type="button" class="badge badge-danger" onclick="showModalDeleteUser({{ user['id'] }})">deletar</a></td>
-                    </tr>
-                    {% endfor %}
+
                   </tbody>
                 </table>
             </div>
@@ -78,6 +73,25 @@
 </div>
 <script>
     $('#user_manager').addClass('active')
+    $('#table_users').DataTable({
+            "ajax": {
+                "url": "{{ url_for('user.load_users') }}",
+                "dataSrc": "data"
+            },
+            "columnDefs": [
+                { "width": "150px", "targets": 0 },
+                { "width": "30px", "targets": 1, "className": "text-center" },
+            ],
+            "columns": [
+                { "data": "login" },
+                {
+                    "data": null,
+                     "render": function(data, type, row) {
+                        return '<a href="#" type="button" class="badge badge-danger" onclick="showModalDeleteUser(' + data.id + ')">deletar</a>';
+                    }
+                },
+            ]
+    });
     function showModalDeleteUser(id){
         $('#user_delete').val(id)
         $('#modalDelete').modal('show')
