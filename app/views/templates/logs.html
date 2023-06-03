@@ -3,28 +3,19 @@
 {% block content %}
 <div class="row">
     <div class="col borda">
-        <div class="row space center">
+        <div class="row space">
             <div class="col">
-                <table class="table table-sm">
+                <table id="table_logs" class="table table-striped table-bordered" style="width:100%">
                   <thead>
                     <tr>
-                      <th scope="col-md-2">Usuário Logado</th>
-                      <th scope="col-md-2">Usuário Router</th>
-                      <th scope="col-md-2">IP</th>
-                      <th scope="col-md-4">Comando</th>
-                      <th scope="col-md-2">Data</th>
+                      <th>Usuário Logado</th>
+                      <th>Usuário Router</th>
+                      <th>IP</th>
+                      <th>Comando</th>
+                      <th>Data</th>
                     </tr>
                   </thead>
                   <tbody>
-                    {% for log in logs %}
-                    <tr>
-                      <td>{{ log['user_app'] }}</td>
-                      <td>{{ log['user_router'] }}</td>
-                      <td>{{ log['ip_address'] }}</td>
-                      <td>{{ log['description'] }}</td>
-                      <td>{{ log['created_at'] }}</td>
-                    </tr>
-                    {% endfor %}
                   </tbody>
                 </table>
             </div>
@@ -34,6 +25,35 @@
 </div>
 <script>
     $('#log_manager').addClass('active')
-
+    $('#table_logs').DataTable({
+            "ajax": {
+                "url": "{{ url_for('log.load_logs') }}",
+                "dataSrc": "data"
+            },
+            "columnDefs": [
+                { "width": "150px", "targets": 0 },
+                { "width": "150px", "targets": 1 },
+                { "width": "20px", "targets": 2 },
+                { "width": "150px", "targets": 4 },
+                {
+                    "targets": 4,
+                    "render": function(data, type, row, meta) {
+                    if (type === 'display') {
+                        var date = new Date(data);
+                        var formattedDate = ('0' + date.getDate()).slice(-2) + '/' + ('0' + (date.getMonth() + 1)).slice(-2) + '/' + date.getFullYear() + ' ' + ('0' + date.getHours()).slice(-2) + ':' + ('0' + date.getMinutes()).slice(-2) + ':' + ('0' + date.getSeconds()).slice(-2);
+                        return formattedDate;
+                    }
+                    return data;
+                }
+                },
+            ],
+            "columns": [
+                { "data": "user_app" },
+                { "data": "user_router" },
+                { "data": "ip_address" },
+                { "data": "description" },
+                { "data": "created_at" },
+            ]
+        });
 </script>
 {% endblock %}

@@ -35,5 +35,5 @@ def user_manager():
 @login_required
 def log_manager():
     logs = log_service.get_all_logs()
-    return render_template('logs.html', logs=logs)
+    return render_template('logs.html')
 
