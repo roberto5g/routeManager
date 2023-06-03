@@ -8,6 +8,7 @@ from app.controllers.log_controller import log_bp
 
 
 app = Flask(__name__, template_folder='views/templates', static_folder='views/static')
+
 configuration.init_app(app)
 database.init_app(app)
 commands.init_app(app)
